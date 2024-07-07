@@ -1,9 +1,14 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $recipient = $_POST["recipient"];
+    $subject = $_POST["subject"];
+    $message = $_POST["message"];
 
-$message = "First line of text\nSecond line of text";
+    // Use wordwrap() if lines are longer than 70 characters
+    $message = wordwrap($message, 70);
 
-
-$message = wordwrap($message, 70);
-
-mail("lynsnowie@outlook.com", "My subject", $message);
+    // Send the email
+    mail($recipient, $subject, $message);
+    echo "Email sent successfully!";
+}
 ?>
